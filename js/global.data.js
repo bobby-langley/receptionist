@@ -1,0 +1,32 @@
+//-- LOGS COMPONENT DATA
+var _LOGS_LIST = null,
+    _LOGS_CONT = null,
+    _LOG_COUNT = 0;
+
+//-- PRINTER API DATA
+var PRINT_PORT = {
+    PRINT_PORT_0: "PRINTERPORT0",
+    PRINT_PORT_1: "PRINTERPORT1",
+    PRINT_PORT_2: "PRINTERPORT2"
+};
+
+var BAUDRATE = 115200; //9600
+
+var PARITY = {
+    PARITY_NONE: "NONE",
+    PAIRTY_ODD: "ODD",
+    PARITY_EVEN: "EVEN"
+};
+
+var STOP_BITS = {
+    STOP_BITS_ONE: "1",
+    STOP_BITS_ONE_POINT_FIVE: "1.5",
+    STOP_BITS_TWO: "2"
+};
+
+var DATA_BITS = {
+    DATA_BITS_5: "BITS5",
+    DATA_BITS_6: "BITS6",
+    DATA_BITS_7: "BITS7",
+    DATA_BITS_8: "BITS8"
+};

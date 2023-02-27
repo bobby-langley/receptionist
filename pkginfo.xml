@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pkg name="Tizen" type="Kiosk">
+<packagever>1.0.0</packagever>
+    <app>
+        <apptype>order_web</apptype>
+        <Existence>1</Existence>
+        <appfile>SamsungVX.wgt</appfile>
+        <version>13</version>
+    </app>
+</pkg>

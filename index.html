@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Screensaver</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Bootstrap CSS -->  
+  <script type="text/javascript" type="module" src="$B2BAPIS/b2bapis/b2bapis.js"></script>
+  <script type="text/javascript" type="module" src="$WEBAPIS/webapis/webapis.js"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body scroll="no">
+  <div class="samsung">
+    <div class="screensaver">
+      
+     
+        <img  src="img/top-banner.jpg"/>
+  
+      <div class="content">
+        <div class="top-section">
+          <img src="img/SIXTEEN-NINE.png" class="samsung-logo" />
+        </div>
+        <div class="bottom-section">
+          <h1>Welcome to the 2022 Sixteen:Nine DSE Mixer!</h1>
+          <hr class="under" />
+          <h3>Scan QR code to begin</h3>
+          <a class="btn btn-primary" onclick="print()">Scan QR</a>
+          <h3 class="sponsors-text2">This evening's sponsors:</h3>
+          <img class="sponsors" src="img/sponsors.png"/>
+          <div class="footer">
+            <img src="img/powered.svg" class="powered-by" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="js/jquery-3.2.1.slim.min.js"></script>
+   <script type="module" src="js/printing.js" crossorigin="null"></script>
+  <script src="./js/printing.js"></script>
+  <script type="text/javascript"> 
+    function print(){
+      printerService.getSerialPrintVersion()
+      printerService.openSerialPrint()
+      printerService.writeReceipt()
+      console.log("printClicked")
+  }
+  </script>
+</body>
+
+</html>

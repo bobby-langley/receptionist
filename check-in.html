@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>Check-IN</title>
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+    <link rel="stylesheet" href="./css/index.css">
+  </head>
+
+  <body scroll="no">
+    <div class="samsung-checkin">
+      <div class="check-In">
+        <img src="img/top-banner.jpg" class="top-banner" />
+        <div class="content">
+          <div class="top-section">
+            <img src="img/SIXTEEN-NINE.png" class="samsung-vx-logo" />
+
+            <h1>Please enter the information below to check in</h1>
+            <div class="form__group field">
+              <div class="form-control text-box">
+                <input
+                  type="input"
+                  oninput="checkvalue()"
+                  class="form__field"
+                  placeholder="First Name*"
+                  name="firstname"
+                  id="firstname"
+                  required
+                />
+                
+              </div>
+              <div class="form-control text-box">
+                <input
+                  type="input"
+                  oninput="checkvalue()"
+                  class="form__field"
+                  placeholder="Last Name*"
+                  name="lastname"
+                  id="lastname"
+                  required
+                />
+              </div>
+              <div class="form-control text-acknowledge">
+                <h3 class="win-a-prize"
+                  >We'll know you made it to the event and you'll be entered into a drawing to win a prize!
+                 </h3
+                >
+              </div>
+              <!--<div class="form-control phone-number text-box">
+              <input type="input" class="form__field" placeholder="Type Your Phone Number" name="number" id='number'
+                required />
+              <label for="number" class="form__label">Type Your Phone Number</label>
+            </div>-->
+              <div class="form-control acknowldge-check">
+                
+              </div>
+            </div>
+            <h1 id="errormessage"></h1>
+          </div>
+          <div class="bottom-section">
+            <a
+              class="btn btn-secondary"
+              href="javascript:showError()"
+              id="checkinbutton1"
+              >Check IN</a
+            >
+            <a
+              class="btn btn-primary"
+              style="display: none"
+              id="checkinbutton2"
+              href="javascript:makeCall()"
+              >Check IN</a
+            >
+            <a class="btn btn-outline" href="index.html">Cancel</a>
+            <div class="footer">
+              <img src="img/powered.svg" class="powered-by" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+    <script type="module" src="./js/index.js" crossorigin="null"></script>
+    
+    <script type="text/javascript">
+      $(document).ready(function () {
+        document.getElementById("checkinbutton2").style.display = "none";
+        document.getElementById("checkinbutton1").style.opacity = ".5";
+      });
+      function checkvalue() {
+        let firstname = document.getElementById("firstname").value;
+        if (firstname.length == 1) {
+          document.getElementById("firstname").value = firstname.toUpperCase();
+        }
+        let lastname = document.getElementById("lastname").value;
+        if (lastname.length == 1) {
+          document.getElementById("lastname").value = lastname.toUpperCase();
+        }
+       
+        
+        let confirm = $("#inlineCheckbox1").is(":checked");
+
+        document.getElementById("errormessage").style.display = "none";
+        if (
+          firstname.length &&
+          lastname.length 
+        ) {
+          document.getElementById("checkinbutton2").style.display = "block";
+          document.getElementById("checkinbutton1").style.display = "none";
+        } else {
+          document.getElementById("checkinbutton1").style.opacity = ".5";
+          document.getElementById("checkinbutton1").style.display = "block";
+          document.getElementById("checkinbutton2").style.display = "none";
+        }
+      }
+      function showError() {
+        document.getElementById("errormessage").style.display = "block";
+        document.getElementById("errormessage").innerText =
+          "Please fill in required fields.";
+        document.getElementById("errormessage").style.fontSize = "20px";
+      }
+      function makeCall() {
+        let firstname = document.getElementById("firstname").value;
+        let lastname = document.getElementById("lastname").value;
+        let monthNames = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+
+        let date = new Date();
+        let CheckDate = `${
+          monthNames[date.getMonth()]
+        } ${date.getDate()} ${date.getFullYear()} ${date
+          .toLocaleString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          })
+          .replace(" ", "")}`;
+          console.log(CheckDate, "date")
+        let body = {
+          FirstName: firstname,
+          LastName: lastname,
+          CheckedInDate: CheckDate,
+        };
+        var apiURL = "https://staging.grubbrr.com/api/SamsungVXCheckIn";
+
+        fetch(apiURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        })
+          .then((response) => {
+            console.log(response)
+            return response.json();
+          },
+          (err) => {
+              console.log(err);
+            }
+          )
+          .then((data) => {
+            console.log(data, "data");
+            if (!data) {
+              document.getElementById("errormessage").style.display = "block";
+              document.getElementById("errormessage").innerText =
+                "Network Error";
+            } else if (data.status == "success" && data.statusCode == "200") {
+              document.location.href = `./confirmation.html?firstname=${firstname}&lastname=${lastname}`;
+            } else if (data.status == "error" && data.statusCode == "500") {
+              document.getElementById("errormessage").style.display = "block";
+              document.getElementById("errormessage").innerText =
+                "Network Error";
+            } else if (data.status == "error" && data.statusCode == "409") {
+              document.getElementById("errormessage").style.display = "block";
+              document.getElementById("errormessage").innerText =
+                "Guest already checked in.";
+            } else {
+              document.location.href = "./guest-not-found-checkin.html";
+            }
+          });
+      }
+    </script>
+  </body>
+</html>

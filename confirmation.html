@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Confirmation</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body scroll="no">
+  <div class="samsung">
+    <div class="confirmation">
+
+      <div class="content">
+        <img src="img/SIXTEEN-NINE.png" class="samsung-vx-logo" />
+        <div class="top-section">
+            
+
+          <!-- <img src="img/check.gif" class="check-gif" /> -->
+          <h1>Thanks for checking in!</h1>
+          <h2>If you win, you'll be contacted after the event, via email.</h2>
+          <hr class="under" />
+          <div class="name">
+            <h4>Name</h4>
+            <h3 id="dynamicname"></h3>
+            <hr class="under" />
+          </div>
+          <h1>Badge Pick-Up</h1>
+          <h2>Your name is already printed and laid out A-Z on the lobby tables. Find yours and see the check-in desk to get your badge and lanyard.</h2>
+          
+          <hr class="under3" />
+          <div>
+            <h3 class="sponsors-text">This evening's sponsors:</h3>
+          <img src="img/sponsors.png" class="sponsors" />
+        </div>
+        </div>
+        <div class="bottom-section">
+          <a class="btn btn-primary" href="index.html">Done</a>
+          <div class="footer">
+            <img src="img/powered.svg" class="powered-by" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="js/jquery-3.2.1.slim.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+    setTimeout(function(){
+       window.location.href = 'index.html';
+    }, 10000);
+ </script>
+  <script type="text/javascript">
+  
+$(document).ready(function(){
+let queryString = window.location.search
+let urlParams = new URLSearchParams(queryString)
+document.getElementById('dynamicname').innerText=urlParams.get('firstname')+' '+urlParams.get('lastname')
+document.getElementById('dynamiccompany').innerText=urlParams.get('companyname')
+})
+  </script>
+</body>
+
+</html>
